@@ -30,6 +30,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 import kmpbasico.composeapp.generated.resources.Res
 import kmpbasico.composeapp.generated.resources.compose_multiplatform
+import org.basic.project.bottomBar.BottomBarScreen
 
 @Composable
 fun App() {
@@ -41,8 +42,8 @@ fun App() {
 }
 class MainScreen: Screen {
     @Composable
-     override fun Content() {
-        val navigator : Navigator= LocalNavigator.currentOrThrow
+    override fun Content() {
+        val navigator: Navigator = LocalNavigator.currentOrThrow
 
         var name: String by remember { mutableStateOf("") }
         var apellido: String by remember { mutableStateOf("") }
@@ -56,7 +57,8 @@ class MainScreen: Screen {
         ) {
             TextField(
                 value = name,
-                onValueChange = { name = it
+                onValueChange = {
+                    name = it
                 }
 
             )
@@ -65,7 +67,8 @@ class MainScreen: Screen {
 
             TextField(
                 value = apellido,
-                onValueChange = { apellido = it
+                onValueChange = {
+                    apellido = it
                 }
 
             )
@@ -93,89 +96,104 @@ class MainScreen: Screen {
                 onClick = {
                     navigator.push(SecondScreen())
 
-                }){
+                }) {
                 Text(
-                    text = "Pantalla 2")
+                    text = "Pantalla 2"
+                )
 
             }
             Button(
                 onClick = {
                     navigator.push(ThirdScreen())
 
-                }){
+                }) {
                 Text(
-                    text = "Pantalla 3")
+                    text = "Pantalla 3"
+                )
 
             }
-        }
-    }
-}
-class SecondScreen: Screen {
-    @Composable
-    override fun Content() {
-        val navigator : Navigator= LocalNavigator.currentOrThrow
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.Yellow),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceAround
-        ){
-            Text(
-                text = "Segunda pantalla",
-                fontSize = 20.sp,
-                color = Color.Black
-            )
-
-            Spacer(
-                modifier = Modifier
-                    .height(20.dp)
-            )
+            Spacer(modifier = Modifier.height(30.dp))
 
             Button(
                 onClick = {
-                    navigator.push(MainScreen())
+                    navigator.push(BottomBarScreen())
 
-                }
-            ) {
+                }) {
                 Text(
-                    text = "Vamos para atrás"
+                    text = "BOTTOM BAR"
                 )
             }
         }
     }
-}
-class ThirdScreen: Screen {
-    @Composable
-    override fun Content() {
-        val navigator : Navigator= LocalNavigator.currentOrThrow
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.Red),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceAround
-        ){
-            Text(
-                text = "Tercera pantalla",
-                fontSize = 20.sp,
-                color = Color.Black
-            )
 
-            Spacer(
+    class SecondScreen : Screen {
+        @Composable
+        override fun Content() {
+            val navigator: Navigator = LocalNavigator.currentOrThrow
+            Column(
                 modifier = Modifier
-                    .height(20.dp)
-            )
-
-            Button(
-                onClick = {
-                    navigator.pop()
-
-                }
+                    .fillMaxSize()
+                    .background(Color.Yellow),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceAround
             ) {
                 Text(
-                    text = "Vamos para atrás"
+                    text = "Segunda pantalla",
+                    fontSize = 20.sp,
+                    color = Color.Black
                 )
+
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+
+                Button(
+                    onClick = {
+                        navigator.push(MainScreen())
+
+                    }
+                ) {
+                    Text(
+                        text = "Vamos para atrás"
+                    )
+                }
+            }
+        }
+    }
+
+    class ThirdScreen : Screen {
+        @Composable
+        override fun Content() {
+            val navigator: Navigator = LocalNavigator.currentOrThrow
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Red),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceAround
+            ) {
+                Text(
+                    text = "Tercera pantalla",
+                    fontSize = 20.sp,
+                    color = Color.Black
+                )
+
+                Spacer(
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+
+                Button(
+                    onClick = {
+                        navigator.pop()
+
+                    }
+                ) {
+                    Text(
+                        text = "Vamos para atrás"
+                    )
+                }
             }
         }
     }
